@@ -1,0 +1,22 @@
+#
+#Sat Dec 20 16:34:58 CST 2008
+genBasicCompId=false
+sessionFactoryName=com.dpxt.dao.hbn.HibernateSessionFactory
+profile=
+daoSFId=sessionFactory
+version=3.0
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=src/applicationContext.xml
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+reSettingsFile=
+configFile=/DPXT/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

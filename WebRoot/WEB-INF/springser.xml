@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd" >
+
+<beans>
+	<bean name="/dP" class="com.dpxt.struts.action.DPAction">
+		<property name="fangYingService">
+			<ref bean="FangYingService"/>
+		</property>
+		<property name="yps">
+			<ref bean="YingPianService"/>
+		</property>
+		<property name="yts">
+			<ref bean="YingTingService"/>
+		</property>
+		<property name="zwyds">
+			<ref bean="ZwydService"/>
+		</property>
+	</bean>
+	<bean name="/tem" class="com.dpxt.struts.action.TemAction">
+		<property name="fangYingService">
+			<ref bean="FangYingService"/>
+		</property>
+		<property name="yps">
+			<ref bean="YingPianService"/>
+		</property>
+		<property name="yts">
+			<ref bean="YingTingService"/>
+		</property>
+		<property name="zwyds">
+			<ref bean="ZwydService"/>
+		</property>
+		<property name="pser">
+			<ref bean="Pservice"/>
+		</property>
+		<property name="hys">
+			<ref bean="HYService"/>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "dtd/spring-beans-2.0.dtd" >
+<beans>
+	<bean id="GPDataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver">
+		</property>
+		<property name="url"
+			value="jdbc:oracle:thin:@127.0.0.1:1521:myoracle">
+		</property>
+		<property name="username" value="goupiaoXT"></property>
+		<property name="password" value="passward"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="GPDataSource"></ref>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.Oracle9Dialect
+				</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.format_sql">true</prop>				
+			</props>
+		</property>
+			<property name="eventListeners">
+			<map>
+				<entry key="merge">
+					<bean
+						class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener" />
+				</entry>
+			</map>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/dpxt/domin/Zwyd.hbm.xml</value>
+				<value>com/dpxt/domin/Piao.hbm.xml</value>
+				<value>com/dpxt/domin/Huiyuan.hbm.xml</value>
+				<value>com/dpxt/domin/Yingting.hbm.xml</value>
+				<value>com/dpxt/domin/Yingpian.hbm.xml</value>
+				<value>com/dpxt/domin/Fangying.hbm.xml</value></list>
+		</property>
+		</bean>
+<!--=========================== 事务管理 ===========================-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 事务拦截器 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<!-- 定义事务传播属性 -->
+			<props>
+				<prop key="save">PROPAGATION_REQUIRED</prop>
+				<prop key="delete">PROPAGATION_REQUIRED</prop>
+				<prop key="findById">PROPAGATION_REQUIRED</prop>
+				<prop key="attach">PROPAGATION_REQUIRED</prop>
+				<prop key="findAll">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 定义一个BeanPostProcessor bean。 
+		Spring提供BeanPostProcessor的实现类BeanNameAutoProxyCreator -->
+
+
+		
+	<bean id="ZwydDAO" class="com.dpxt.dao.hbn.ZwydDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="PiaoDAO" class="com.dpxt.dao.hbn.PiaoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="HuiyuanDAO" class="com.dpxt.dao.hbn.HuiyuanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="YingtingDAO" class="com.dpxt.dao.hbn.YingtingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="YingpianDAO" class="com.dpxt.dao.hbn.YingpianDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="FangyingDAO" class="com.dpxt.dao.hbn.FangyingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="FangYingService" class="com.dpxt.service.FangYingServiceImpl">
+		<property name="dao">
+			<ref bean="FangyingDAO"></ref>
+		</property>
+	</bean>
+	<bean id="YingPianService" class="com.dpxt.service.YingPianServiceImpl">
+		<property name="dao">
+			<ref bean="YingpianDAO"></ref>
+		</property>
+	</bean>
+	<bean id="YingTingService" class="com.dpxt.service.YingTingServiceImpl">
+		<property name="dao">
+			<ref bean="YingtingDAO"></ref>
+		</property>
+	</bean>
+	<bean id="ZwydService" class="com.dpxt.service.ZwydServiceImpl">
+		<property name="dao">
+			<ref bean="ZwydDAO"></ref>
+		</property>
+	</bean>
+	<bean id="Pservice" class="com.dpxt.service.PserviceImpl">
+		<property name="dao">
+			<ref bean="PiaoDAO"></ref>
+		</property>
+	</bean>
+	<bean id="HYService" class="com.dpxt.service.HYServiceImpl">
+		<property name="dao">
+			<ref bean="HuiyuanDAO"></ref>
+		</property>
+	</bean>
+</beans>

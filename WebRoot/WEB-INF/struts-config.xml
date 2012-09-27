@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  
+  <form-beans >
+    <form-bean name="dpForm" type="com.dpxt.struts.form.DPForm" />
+    <form-bean name="temForm" type="com.dpxt.struts.form.TemForm" />
+
+  </form-beans>
+
+  <global-exceptions>
+  </global-exceptions>
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="dPForm"
+      name="dPForm"
+      parameter="reqId"
+      path="/dP"
+      scope="request"
+      type="com.dpxt.struts.action.DPAction">
+      <forward name="showOK" path="/shouye.jsp" />
+      <forward name="xuanzuoOK" path="/xuanzuo.jsp" />
+    </action>
+    <action
+      attribute="temForm"
+      name="temForm"
+      parameter="qw"
+      path="/tem"
+      scope="request"
+      type="com.dpxt.struts.action.TemAction">
+      <forward name="quxiao" path="/quxiao.jsp" />
+      <forward name="yulan" path="/yulan.jsp" />
+      <forward name="showOK" path="/shouye.jsp" />
+      <forward name="yd" path="/yiding.jsp" />
+      <forward name="qr" path="/queren.jsp" />
+      <forward name="xuanzuoOK" path="/xuanzuo.jsp" />
+    </action>
+   </action-mappings>
+ 	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+ 
+	
+  <message-resources parameter="com.dpxt.struts.ApplicationResources" />
+  	<plug-in
+		className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation"
+		value="/WEB-INF/springser.xml,/WEB-INF/applicationContext.xml" />
+	</plug-in>
+</struts-config>
+
